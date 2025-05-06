@@ -1,17 +1,29 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
 import { collection, doc, setDoc, getDoc } from 'firebase/firestore';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { adId, rowIndex, ad_content, photo_url } = body;
+    const { adId, rowIndex, adContent, photoUrl, demand, product, area, name, phone, budget, note, purpose } = body;
+
+    if (!adId) {
+      return NextResponse.json({ error: 'Missing adId' }, { status: 400 });
+    }
 
     await setDoc(doc(db, 'ads', adId), {
       adId,
       rowIndex,
-      ad_content,
-      photo_url,
+      adContent,
+      photoUrl,
+      demand,
+      product,
+      area,
+      name,
+      phone,
+      budget,
+      note,
+      purpose,
       createdAt: new Date().toISOString(),
     });
 
@@ -26,7 +38,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
     const adId = url.searchParams.get('adId');
