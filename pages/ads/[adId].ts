@@ -21,12 +21,12 @@ interface Ad {
 
 export default function AdDetail() {
   const router = useRouter();
-  const { adId } = router.query;
   const [ad, setAd] = useState<Ad | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (adId && typeof adId === 'string') {
+    const { adId } = router.query;
+    if (router.isReady && typeof adId === 'string') {
       const fetchAd = async () => {
         try {
           const docRef = doc(db, 'ads', adId);
@@ -44,7 +44,7 @@ export default function AdDetail() {
       };
       fetchAd();
     }
-  }, [adId]);
+  }, [router.isReady, router.query]);
 
   if (loading) return <div>Đang tải...</div>;
   if (!ad) return <div>Quảng cáo không tồn tại</div>;
