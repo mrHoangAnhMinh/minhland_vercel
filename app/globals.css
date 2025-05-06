@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+  --font-roboto-mono: 'Roboto Mono', monospace;
+}
+
+body {
+  font-family: var(--font-inter);
+  @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+}
+
+.column {
+  @apply flex flex-col space-y-4 max-w-2xl mx-auto;
+}
+
+h2 {
+  @apply text-2xl font-bold text-green-700 dark:text-green-300;
+}
+
+.table-container {
+  @apply overflow-x-auto;
+}
+
+button {
+  @apply transition-colors duration-200;
+}
+
+input, textarea, select {
+  @apply border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100;
+  @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500 rounded-md;
+}
+
+.dialog-content {
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6;
+}
+
+/* Ensure shadcn/ui components are styled consistently */
+.table {
+  @apply w-full border-collapse border border-gray-400 dark:border-gray-600;
+}
+
+.table-header {
+  @apply bg-gray-100 dark:bg-gray-700;
+}
+
+.table-cell {
+  @apply border border-gray-400 dark:border-gray-600 px-4 py-2;
+}
